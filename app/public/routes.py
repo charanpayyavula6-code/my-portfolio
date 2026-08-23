@@ -73,6 +73,10 @@ def contact():
     flash('Thank you! Your message has been sent successfully.', 'success')
     return redirect(url_for('public.index') + '#contact')
 
+@public_bp.route('/uploads/<path:filename>')
+def custom_uploads(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
+
 @public_bp.route('/api/projects/<int:id>')
 def project_details(id):
     project = Project.query.get_or_404(id)
