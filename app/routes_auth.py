@@ -19,8 +19,11 @@ def login():
         
         if admin and admin.check_password(form.password.data):
             login_user(admin, remember=form.remember_me.data)
-            admin.last_login = datetime.utcnow()
-            db.session.commit()
+            try:
+                admin.last_login = datetime.utcnow()
+                db.session.commit()
+            except Exception:
+                db.session.rollback()
             flash(f'Welcome back, {admin.username}!', 'success')
             next_page = request.args.get('next')
             return redirect(next_page or url_for('admin.dashboard'))
