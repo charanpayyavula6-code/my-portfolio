@@ -8,15 +8,9 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'charan-portfolio-super-secure-production-secret-key-2026')
     
-    # Detect serverless / read-only filesystem
-    is_serverless = bool(
-        os.getenv('VERCEL') or 
-        os.getenv('AWS_LAMBDA_FUNCTION_NAME') or 
-        os.getenv('LAMBDA_TASK_ROOT') or
-        not os.access(BASE_DIR, os.W_OK)
-    )
-
-    if is_serverless:
+    # On Linux / POSIX (e.g. Vercel Lambda container), /tmp is the ONLY writable directory.
+    # On Windows (local developer environment), use project folder database.
+    if os.name == 'posix' or os.getenv('VERCEL') or os.getenv('AWS_LAMBDA_FUNCTION_NAME') or os.getenv('LAMBDA_TASK_ROOT'):
         default_db = 'sqlite:////tmp/portfolio.db'
         default_uploads = '/tmp/uploads'
     else:

@@ -12,6 +12,11 @@ repo_db = os.path.join(BASE_DIR, 'portfolio.db')
 if not os.path.exists(tmp_db) and os.path.exists(repo_db):
     try:
         shutil.copyfile(repo_db, tmp_db)
+    except Exception:
+        pass
+
+if os.path.exists(tmp_db):
+    try:
         os.chmod(tmp_db, 0o666)
     except Exception:
         pass
