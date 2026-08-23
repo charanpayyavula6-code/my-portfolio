@@ -51,7 +51,6 @@ def dashboard():
 @admin_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    print(f"DEBUG PROFILE ROUTE - DB ENGINE URL: {db.engine.url}")
     profile_data = Profile.query.first()
     if not profile_data:
         profile_data = Profile(about_text_1="AI/ML Student at Prathyusha Engineering College.")

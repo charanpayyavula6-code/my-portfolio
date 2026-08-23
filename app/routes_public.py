@@ -17,14 +17,6 @@ def add_no_cache_headers(response):
 
 @public_bp.route('/')
 def index():
-    print(f"DEBUG JINJA - current_app.template_folder: {current_app.template_folder}")
-    print(f"DEBUG JINJA - public/index.html exists: {os.path.exists(os.path.join(current_app.template_folder, 'public', 'index.html'))}")
-    if os.path.exists(current_app.template_folder):
-        print(f"DEBUG JINJA - template folder contents: {os.listdir(current_app.template_folder)}")
-        pub_dir = os.path.join(current_app.template_folder, 'public')
-        if os.path.exists(pub_dir):
-            print(f"DEBUG JINJA - public folder contents: {os.listdir(pub_dir)}")
-    
     profile = Profile.query.first()
     if not profile:
         profile = Profile()
