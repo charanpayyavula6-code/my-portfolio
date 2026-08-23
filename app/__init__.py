@@ -13,7 +13,15 @@ def create_app(config_name='default'):
     is_serverless = bool(os.name == 'posix' or os.getenv('VERCEL') or os.getenv('AWS_LAMBDA_FUNCTION_NAME') or os.getenv('LAMBDA_TASK_ROOT'))
     instance_path = '/tmp' if is_serverless else None
     
-    app = Flask(__name__, instance_path=instance_path)
+    template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates'))
+    static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
+    
+    app = Flask(
+        __name__,
+        template_folder=template_dir,
+        static_folder=static_dir,
+        instance_path=instance_path
+    )
     app.config.from_object(config_by_name[config_name])
 
     if is_serverless and not os.getenv('DATABASE_URL'):
