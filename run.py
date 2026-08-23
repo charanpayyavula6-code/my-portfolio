@@ -3,7 +3,18 @@ from app import create_app
 from app.extensions import db
 from app.models import Admin
 
-app = create_app(os.getenv('FLASK_ENV', 'development'))
+app = create_app(os.getenv('FLASK_ENV', 'production'))
+
+# Auto-initialize database on cold start if empty
+with app.app_context():
+    try:
+        db.create_all()
+        from app.models import Profile
+        if not Profile.query.first():
+            from seed import seed_database
+            seed_database()
+    except Exception as e:
+        print(f"Startup DB check: {e}")
 
 @app.cli.command('init-db')
 def init_db():
