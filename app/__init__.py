@@ -1,10 +1,9 @@
 import os
 import sys
 
-# Ensure current working directory and app root are in sys.path on all platforms including Vercel
-for p in [os.getcwd(), os.path.dirname(os.path.abspath(__file__))]:
-    if p and p not in sys.path:
-        sys.path.insert(0, p)
+_APP_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if _APP_ROOT not in sys.path:
+    sys.path.insert(0, _APP_ROOT)
 
 from flask import Flask, render_template
 from config import config_by_name
@@ -24,10 +23,10 @@ def create_app(config_name='default'):
     login_manager.init_app(app)
     csrf.init_app(app)
 
-    # Register Blueprints
-    from app.public.routes import public_bp
-    from app.auth.routes import auth_bp
-    from app.admin.routes import admin_bp
+    # Register Blueprints directly from app root
+    from app.routes_public import public_bp
+    from app.routes_auth import auth_bp
+    from app.routes_admin import admin_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp, url_prefix='/admin')

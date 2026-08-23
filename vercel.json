@@ -1,22 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "run.py",
-      "use": "@vercel/python",
-      "config": {
-        "includeFiles": ["app/**", "config.py", "seed.py"]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/app/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "run.py"
+      "source": "/(.*)",
+      "destination": "/api/index.py"
     }
   ]
 }
