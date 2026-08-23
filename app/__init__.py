@@ -1,4 +1,10 @@
 import os
+import sys
+
+_APP_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if _APP_ROOT not in sys.path:
+    sys.path.insert(0, _APP_ROOT)
+
 from flask import Flask, render_template
 from config import config_by_name
 from app.extensions import db, login_manager, csrf
