@@ -10,8 +10,15 @@ from config import config_by_name
 from app.extensions import db, login_manager, csrf
 
 def create_app(config_name='default'):
-    app = Flask(__name__)
+    is_serverless = bool(os.name == 'posix' or os.getenv('VERCEL') or os.getenv('AWS_LAMBDA_FUNCTION_NAME') or os.getenv('LAMBDA_TASK_ROOT'))
+    instance_path = '/tmp' if is_serverless else None
+    
+    app = Flask(__name__, instance_path=instance_path)
     app.config.from_object(config_by_name[config_name])
+
+    if is_serverless and not os.getenv('DATABASE_URL'):
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/portfolio.db'
+        app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
 
     # Ensure upload folder exists
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
