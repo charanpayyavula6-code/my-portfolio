@@ -1,5 +1,8 @@
 {
-  "version": 2,
-  "name": "payyavula-sri-charan-portfolio",
-  "cleanUrls": true
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.py"
+    }
+  ]
 }
