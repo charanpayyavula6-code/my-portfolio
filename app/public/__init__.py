@@ -1,1 +1,1 @@
-from app.public.routes import public_bp
+from .routes import public_bp
