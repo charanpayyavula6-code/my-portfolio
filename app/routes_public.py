@@ -47,7 +47,7 @@ def index():
     services = Service.query.filter_by(is_active=True).order_by(Service.display_order.asc()).all()
 
     return render_template(
-        'public/index.html',
+        'site/index.html',
         profile=profile,
         projects=projects,
         skills_by_category=skills_by_category,
