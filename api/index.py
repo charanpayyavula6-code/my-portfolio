@@ -9,17 +9,20 @@ if BASE_DIR not in sys.path:
 # If in serverless environment, ensure writable database exists in /tmp
 tmp_db = '/tmp/portfolio.db'
 repo_db = os.path.join(BASE_DIR, 'portfolio.db')
-if not os.path.exists(tmp_db) and os.path.exists(repo_db):
-    try:
-        shutil.copyfile(repo_db, tmp_db)
-    except Exception:
-        pass
 
-if os.path.exists(tmp_db):
-    try:
-        os.chmod(tmp_db, 0o666)
-    except Exception:
-        pass
+if os.name == 'posix' or os.getenv('VERCEL') or os.getenv('AWS_REGION'):
+    if not os.path.exists(tmp_db) and os.path.exists(repo_db):
+        try:
+            with open(repo_db, 'rb') as src, open(tmp_db, 'wb') as dst:
+                dst.write(src.read())
+        except Exception as e:
+            print(f"Error copying DB to /tmp: {e}")
+
+    if os.path.exists(tmp_db):
+        try:
+            os.chmod(tmp_db, 0o777)
+        except Exception:
+            pass
 
 from app import create_app
 from app.extensions import db
