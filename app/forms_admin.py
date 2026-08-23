@@ -17,17 +17,17 @@ class ProfileForm(FlaskForm):
     college = StringField('College / University', validators=[DataRequired(), Length(max=200)])
     degree_branch = StringField('Degree & Branch', validators=[DataRequired(), Length(max=120)])
     
-    github_url = StringField('GitHub URL', validators=[Optional(), URL()])
-    linkedin_url = StringField('LinkedIn URL', validators=[Optional(), URL()])
-    website_url = StringField('Personal Website URL', validators=[Optional(), URL()])
+    github_url = StringField('GitHub URL', validators=[Optional(), Length(max=255)])
+    linkedin_url = StringField('LinkedIn URL', validators=[Optional(), Length(max=255)])
+    website_url = StringField('Personal Website URL', validators=[Optional(), Length(max=255)])
     
-    profile_image = FileField('Profile Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png', 'webp'], 'Images only (.jpg, .png, .webp)')])
-    resume_file = FileField('Resume (PDF)', validators=[FileAllowed(['pdf'], 'PDF documents only (.pdf)')])
+    profile_image = FileField('Profile Photo', validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'webp'], 'Images only (.jpg, .png, .webp)')])
+    resume_file = FileField('Resume (PDF)', validators=[Optional(), FileAllowed(['pdf'], 'PDF documents only (.pdf)')])
     
-    years_student = IntegerField('Current Year (e.g. 3)', validators=[DataRequired(), NumberRange(min=1, max=5)])
-    projects_count = IntegerField('Projects Count Stat', validators=[DataRequired(), NumberRange(min=0)])
-    hackathons_count = IntegerField('Hackathons Count Stat', validators=[DataRequired(), NumberRange(min=0)])
-    certifications_count = IntegerField('Certifications Count Stat', validators=[DataRequired(), NumberRange(min=0)])
+    years_student = IntegerField('Current Year (e.g. 3)', validators=[Optional(), NumberRange(min=1, max=10)], default=3)
+    projects_count = IntegerField('Projects Count Stat', validators=[Optional(), NumberRange(min=0)], default=6)
+    hackathons_count = IntegerField('Hackathons Count Stat', validators=[Optional(), NumberRange(min=0)], default=3)
+    certifications_count = IntegerField('Certifications Count Stat', validators=[Optional(), NumberRange(min=0)], default=6)
     
     submit = SubmitField('Save Profile Changes')
 

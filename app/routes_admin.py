@@ -60,24 +60,36 @@ def profile():
     form = ProfileForm(obj=profile_data)
     pwd_form = PasswordChangeForm()
 
-    if form.validate_on_submit():
-        form.populate_obj(profile_data)
-        
-        # Handle Photo Upload
-        if form.profile_image.data:
-            img_path = save_uploaded_file(form.profile_image.data, 'profile')
-            if img_path:
-                profile_data.profile_image = img_path
+    if request.method == 'POST' and 'name' in request.form:
+        if form.validate_on_submit():
+            old_image = profile_data.profile_image
+            old_resume = profile_data.resume_file
+            
+            form.populate_obj(profile_data)
+            
+            # Preserve existing files unless a new file was uploaded
+            profile_data.profile_image = old_image
+            profile_data.resume_file = old_resume
 
-        # Handle Resume Upload
-        if form.resume_file.data:
-            res_path = save_uploaded_file(form.resume_file.data, 'resume')
-            if res_path:
-                profile_data.resume_file = res_path
+            # Handle Photo Upload
+            if form.profile_image.data and hasattr(form.profile_image.data, 'filename') and form.profile_image.data.filename:
+                img_path = save_uploaded_file(form.profile_image.data, 'profile')
+                if img_path:
+                    profile_data.profile_image = img_path
 
-        db.session.commit()
-        flash('Profile information updated successfully!', 'success')
-        return redirect(url_for('admin.profile'))
+            # Handle Resume Upload
+            if form.resume_file.data and hasattr(form.resume_file.data, 'filename') and form.resume_file.data.filename:
+                res_path = save_uploaded_file(form.resume_file.data, 'resume')
+                if res_path:
+                    profile_data.resume_file = res_path
+
+            db.session.commit()
+            flash('Profile information updated successfully! Public website updated.', 'success')
+            return redirect(url_for('admin.profile'))
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    flash(f"Error in {getattr(form, field).label.text}: {error}", "danger")
 
     return render_template('admin/profile.html', form=form, pwd_form=pwd_form, profile=profile_data)
 
