@@ -18,9 +18,9 @@ def create_app(config_name='default'):
     csrf.init_app(app)
 
     # Register Blueprints
-    from .public import public_bp
-    from .auth import auth_bp
-    from .admin import admin_bp
+    from app.public.routes import public_bp
+    from app.auth.routes import auth_bp
+    from app.admin.routes import admin_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp, url_prefix='/admin')
