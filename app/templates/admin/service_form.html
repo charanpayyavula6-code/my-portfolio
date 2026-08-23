@@ -1,0 +1,40 @@
+{% extends 'admin/base.html' %}
+{% block title %}Edit Service{% endblock %}
+{% block page_title %}Edit Service: {{ service.title }}{% endblock %}
+
+{% block page_actions %}
+  <a href="{{ url_for('admin.services') }}" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="admin-card max-w-700">
+  <div class="card-body">
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        <label class="form-label">{{ form.title.label }}</label>
+        {{ form.title(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.icon_class.label }}</label>
+        {{ form.icon_class(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.description.label }}</label>
+        {{ form.description(class="form-control", rows=3) }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.features.label }}</label>
+        {{ form.features(class="form-control", rows=4) }}
+      </div>
+      <div class="form-group">
+        <label class="form-check">{{ form.is_active() }} Active on Public Portfolio</label>
+      </div>
+      <div class="form-actions">
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('admin.services') }}" class="btn btn-ghost">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

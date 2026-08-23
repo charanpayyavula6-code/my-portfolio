@@ -1,0 +1,86 @@
+{% extends 'admin/base.html' %}
+{% block title %}Manage Services{% endblock %}
+{% block page_title %}Services Offered{% endblock %}
+{% block page_subtitle %}Manage the freelance & professional services displayed on your portfolio.{% endblock %}
+
+{% block content %}
+<div class="crud-two-col">
+  <div class="admin-card">
+    <div class="card-header">
+      <h3><i class="fas fa-plus-circle"></i> Add Service</h3>
+    </div>
+    <div class="card-body">
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+          <label class="form-label">{{ form.title.label }}</label>
+          {{ form.title(class="form-control", placeholder="e.g. AI/ML Development") }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.icon_class.label }}</label>
+          {{ form.icon_class(class="form-control", placeholder="fas fa-brain, fab fa-python") }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.description.label }}</label>
+          {{ form.description(class="form-control", rows=3) }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.features.label }}</label>
+          {{ form.features(class="form-control", rows=3, placeholder="Key bullet points (one per line)") }}
+        </div>
+        <div class="form-group">
+          <label class="form-check">{{ form.is_active() }} Active on Public Portfolio</label>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-full") }}
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-card">
+    <div class="card-header">
+      <h3><i class="fas fa-cogs"></i> Services List ({{ services|length }})</h3>
+    </div>
+    <div class="card-body no-padding">
+      {% if services %}
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th width="40">Icon</th>
+              <th>Service</th>
+              <th>Status</th>
+              <th width="100" class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in services %}
+            <tr>
+              <td><i class="{{ s.icon_class }} table-icon"></i></td>
+              <td>
+                <strong>{{ s.title }}</strong>
+                <div class="table-subtext">{{ s.description[:60] }}...</div>
+              </td>
+              <td>
+                {% if s.is_active %}<span class="badge-status badge-active">Active</span>{% else %}<span class="badge-status badge-muted">Inactive</span>{% endif %}
+              </td>
+              <td class="text-right">
+                <div class="action-buttons">
+                  <a href="{{ url_for('admin.edit_service', id=s.id) }}" class="btn-action edit"><i class="fas fa-edit"></i></a>
+                  <form method="POST" action="{{ url_for('admin.delete_service', id=s.id) }}" onsubmit="return confirm('Delete service?');" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type="submit" class="btn-action delete"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state"><p>No services added yet.</p></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

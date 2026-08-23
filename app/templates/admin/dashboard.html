@@ -1,0 +1,121 @@
+{% extends 'admin/base.html' %}
+{% block title %}Dashboard Overview{% endblock %}
+{% block page_title %}Dashboard Overview{% endblock %}
+{% block page_subtitle %}Welcome back! Here is a summary of your portfolio data.{% endblock %}
+
+{% block page_actions %}
+  <a href="{{ url_for('admin.add_project') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Project</a>
+  <a href="{{ url_for('admin.profile') }}" class="btn btn-secondary"><i class="fas fa-user-edit"></i> Edit Profile</a>
+{% endblock %}
+
+{% block content %}
+<!-- Stats Grid -->
+<div class="stats-grid">
+  <div class="stat-box stat-purple">
+    <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
+    <div class="stat-info">
+      <span class="stat-val">{{ stats.projects }}</span>
+      <span class="stat-name">Active Projects</span>
+    </div>
+    <a href="{{ url_for('admin.projects') }}" class="stat-link">Manage <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="stat-box stat-cyan">
+    <div class="stat-icon"><i class="fas fa-code"></i></div>
+    <div class="stat-info">
+      <span class="stat-val">{{ stats.skills }}</span>
+      <span class="stat-name">Technical Skills</span>
+    </div>
+    <a href="{{ url_for('admin.skills') }}" class="stat-link">Manage <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="stat-box stat-green">
+    <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+    <div class="stat-info">
+      <span class="stat-val">{{ stats.certifications }}</span>
+      <span class="stat-name">Certifications</span>
+    </div>
+    <a href="{{ url_for('admin.certifications') }}" class="stat-link">Manage <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="stat-box stat-orange">
+    <div class="stat-icon"><i class="fas fa-envelope"></i></div>
+    <div class="stat-info">
+      <span class="stat-val">{{ stats.messages }}</span>
+      <span class="stat-name">Contact Inquiries ({{ stats.unread_messages }} new)</span>
+    </div>
+    <a href="{{ url_for('admin.messages') }}" class="stat-link">View Inbox <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<!-- Secondary Stats Row -->
+<div class="stats-grid" style="margin-top:16px;">
+  <div class="stat-card-mini">
+    <i class="fas fa-briefcase"></i> <span>Experience: <strong>{{ stats.experience }}</strong></span>
+  </div>
+  <div class="stat-card-mini">
+    <i class="fas fa-graduation-cap"></i> <span>Education: <strong>{{ stats.education }}</strong></span>
+  </div>
+  <div class="stat-card-mini">
+    <i class="fas fa-trophy"></i> <span>Achievements: <strong>{{ stats.achievements }}</strong></span>
+  </div>
+  <div class="stat-card-mini">
+    <i class="fas fa-cogs"></i> <span>Services: <strong>{{ stats.services }}</strong></span>
+  </div>
+</div>
+
+<!-- Two Column Dashboard Widgets -->
+<div class="dashboard-widgets-grid">
+  <!-- Recent Messages Widget -->
+  <div class="admin-card">
+    <div class="card-header">
+      <h3><i class="fas fa-inbox"></i> Recent Inquiries</h3>
+      <a href="{{ url_for('admin.messages') }}" class="btn-sm btn-ghost">View All</a>
+    </div>
+    <div class="card-body">
+      {% if recent_messages %}
+        <div class="message-list-preview">
+          {% for msg in recent_messages %}
+          <div class="msg-preview-item {% if not msg.is_read %}unread{% endif %}">
+            <div class="msg-preview-header">
+              <strong>{{ msg.name }}</strong>
+              <span class="msg-date">{{ msg.created_at.strftime('%b %d, %Y') }}</span>
+            </div>
+            <div class="msg-preview-subject">{{ msg.subject }}</div>
+            <p class="msg-preview-snippet">{{ msg.message[:90] }}...</p>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="empty-placeholder"><i class="fas fa-envelope-open"></i> No messages received yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Recent Projects Widget -->
+  <div class="admin-card">
+    <div class="card-header">
+      <h3><i class="fas fa-rocket"></i> Recent Projects</h3>
+      <a href="{{ url_for('admin.projects') }}" class="btn-sm btn-ghost">View All</a>
+    </div>
+    <div class="card-body">
+      {% if recent_projects %}
+        <div class="project-list-preview">
+          {% for p in recent_projects %}
+          <div class="proj-preview-item">
+            <div class="proj-preview-icon"><i class="{{ p.icon_class }}"></i></div>
+            <div class="proj-preview-info">
+              <strong>{{ p.title }}</strong>
+              <span>{{ p.technologies }}</span>
+            </div>
+            <a href="{{ url_for('admin.edit_project', id=p.id) }}" class="btn-sm btn-ghost"><i class="fas fa-edit"></i> Edit</a>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="empty-placeholder"><i class="fas fa-folder-open"></i> No projects added yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

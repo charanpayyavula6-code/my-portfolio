@@ -1,0 +1,42 @@
+{% extends 'admin/base.html' %}
+{% block title %}Edit Skill{% endblock %}
+{% block page_title %}Edit Skill: {{ skill.name }}{% endblock %}
+{% block page_subtitle %}Update skill category, proficiency, and icon.{% endblock %}
+
+{% block page_actions %}
+  <a href="{{ url_for('admin.skills') }}" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back to Skills</a>
+{% endblock %}
+
+{% block content %}
+<div class="admin-card max-w-600">
+  <div class="card-body">
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        <label class="form-label">{{ form.name.label }}</label>
+        {{ form.name(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.category.label }}</label>
+        {{ form.category(class="form-control form-select") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.level.label }}</label>
+        {{ form.level(class="form-control form-select") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.icon_class.label }}</label>
+        {{ form.icon_class(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.display_order.label }}</label>
+        {{ form.display_order(class="form-control") }}
+      </div>
+      <div class="form-actions">
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('admin.skills') }}" class="btn btn-ghost">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+# Environment secrets
+.env
+.env.local
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# Environments
+venv/
+env/
+ENV/
+
+# Deployment & IDE
+.vercel/
+.idea/
+.vscode/

@@ -1,0 +1,91 @@
+{% extends 'admin/base.html' %}
+{% block title %}Manage Projects{% endblock %}
+{% block page_title %}Projects Management{% endblock %}
+{% block page_subtitle %}Add, edit, and organize all public portfolio project cards.{% endblock %}
+
+{% block page_actions %}
+  <a href="{{ url_for('admin.add_project') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Project</a>
+{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+  <div class="card-header flex-between">
+    <form method="GET" class="table-search-form">
+      <div class="search-input-group">
+        <i class="fas fa-search"></i>
+        <input type="text" name="search" value="{{ search }}" placeholder="Search projects by title or tech..." class="form-control">
+      </div>
+      <select name="category" class="form-control form-select" onchange="this.form.submit()">
+        <option value="all" {% if selected_category == 'all' or not selected_category %}selected{% endif %}>All Categories</option>
+        <option value="ai-ml" {% if selected_category == 'ai-ml' %}selected{% endif %}>AI / Machine Learning</option>
+        <option value="gen-ai" {% if selected_category == 'gen-ai' %}selected{% endif %}>Generative AI</option>
+        <option value="data-science" {% if selected_category == 'data-science' %}selected{% endif %}>Data Science</option>
+        <option value="web" {% if selected_category == 'web' %}selected{% endif %}>Web Development</option>
+        <option value="java" {% if selected_category == 'java' %}selected{% endif %}>Java</option>
+      </select>
+      {% if search or (selected_category and selected_category != 'all') %}
+        <a href="{{ url_for('admin.projects') }}" class="btn btn-ghost btn-sm">Clear</a>
+      {% endif %}
+    </form>
+  </div>
+
+  <div class="card-body no-padding">
+    {% if projects %}
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th width="60">Icon</th>
+              <th>Project Title</th>
+              <th>Category</th>
+              <th>Technologies</th>
+              <th>Featured</th>
+              <th width="150" class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in projects %}
+            <tr>
+              <td>
+                <div class="table-icon-preview {{ p.gradient_class }}">
+                  <i class="{{ p.icon_class }}"></i>
+                </div>
+              </td>
+              <td>
+                <strong>{{ p.title }}</strong>
+                <div class="table-subtext">{{ p.tags }}</div>
+              </td>
+              <td><span class="badge-cat badge-{{ p.category }}">{{ p.category }}</span></td>
+              <td class="tech-cell">{{ p.technologies }}</td>
+              <td>
+                {% if p.is_featured %}
+                  <span class="badge-status badge-active"><i class="fas fa-check"></i> Yes</span>
+                {% else %}
+                  <span class="badge-status badge-muted">No</span>
+                {% endif %}
+              </td>
+              <td class="text-right">
+                <div class="action-buttons">
+                  <a href="{{ url_for('admin.edit_project', id=p.id) }}" class="btn-action edit" title="Edit"><i class="fas fa-edit"></i></a>
+                  <form method="POST" action="{{ url_for('admin.delete_project', id=p.id) }}" onsubmit="return confirm('Are you sure you want to delete {{ p.title }}?');" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type="submit" class="btn-action delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <i class="fas fa-folder-open"></i>
+        <h3>No projects found</h3>
+        <p>Start by adding your first project to showcase on the public website.</p>
+        <a href="{{ url_for('admin.add_project') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Project</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

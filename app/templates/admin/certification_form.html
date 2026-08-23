@@ -1,0 +1,47 @@
+{% extends 'admin/base.html' %}
+{% block title %}Edit Certification{% endblock %}
+{% block page_title %}Edit Certification: {{ cert.title }}{% endblock %}
+
+{% block page_actions %}
+  <a href="{{ url_for('admin.certifications') }}" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="admin-card max-w-700">
+  <div class="card-body">
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        <label class="form-label">{{ form.title.label }}</label>
+        {{ form.title(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.issuer.label }}</label>
+        {{ form.issuer(class="form-control") }}
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">{{ form.issue_date.label }}</label>
+          {{ form.issue_date(class="form-control") }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.icon_class.label }}</label>
+          {{ form.icon_class(class="form-control") }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.credential_url.label }}</label>
+        {{ form.credential_url(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.certificate_image.label }}</label>
+        {{ form.certificate_image(class="form-control") }}
+      </div>
+      <div class="form-actions">
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('admin.certifications') }}" class="btn btn-ghost">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

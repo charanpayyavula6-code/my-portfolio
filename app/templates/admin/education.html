@@ -1,0 +1,91 @@
+{% extends 'admin/base.html' %}
+{% block title %}Manage Education{% endblock %}
+{% block page_title %}Education Timeline{% endblock %}
+{% block page_subtitle %}Manage college, higher secondary, and secondary education.{% endblock %}
+
+{% block content %}
+<div class="crud-two-col">
+  <div class="admin-card">
+    <div class="card-header">
+      <h3><i class="fas fa-plus-circle"></i> Add Education</h3>
+    </div>
+    <div class="card-body">
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+          <label class="form-label">{{ form.degree.label }}</label>
+          {{ form.degree(class="form-control", placeholder="e.g. B.E. — AI & ML") }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.institution.label }}</label>
+          {{ form.institution(class="form-control", placeholder="e.g. Prathyusha Engineering College") }}
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">{{ form.year.label }}</label>
+            {{ form.year(class="form-control", placeholder="2024 – Present") }}
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ form.status_label.label }}</label>
+            {{ form.status_label(class="form-control", placeholder="3rd Year — Ongoing") }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.grade.label }}</label>
+          {{ form.grade(class="form-control", placeholder="e.g. 8.5 CGPA or 90%") }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.description.label }}</label>
+          {{ form.description(class="form-control", rows=3) }}
+        </div>
+        {{ form.submit(class="btn btn-primary btn-full") }}
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-card">
+    <div class="card-header">
+      <h3><i class="fas fa-graduation-cap"></i> Education Records ({{ educations|length }})</h3>
+    </div>
+    <div class="card-body no-padding">
+      {% if educations %}
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Degree & School</th>
+              <th>Years</th>
+              <th>Grade</th>
+              <th width="100" class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for edu in educations %}
+            <tr>
+              <td>
+                <strong>{{ edu.degree }}</strong>
+                <div class="table-subtext">{{ edu.institution }}</div>
+              </td>
+              <td><span class="badge-cat">{{ edu.year }}</span></td>
+              <td><span class="badge-status badge-active">{{ edu.grade }}</span></td>
+              <td class="text-right">
+                <div class="action-buttons">
+                  <a href="{{ url_for('admin.edit_education', id=edu.id) }}" class="btn-action edit"><i class="fas fa-edit"></i></a>
+                  <form method="POST" action="{{ url_for('admin.delete_education', id=edu.id) }}" onsubmit="return confirm('Delete record?');" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type="submit" class="btn-action delete"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state"><p>No education records added yet.</p></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

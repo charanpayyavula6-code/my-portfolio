@@ -1,0 +1,47 @@
+{% extends 'admin/base.html' %}
+{% block title %}Edit Education{% endblock %}
+{% block page_title %}Edit Education: {{ education.degree }}{% endblock %}
+
+{% block page_actions %}
+  <a href="{{ url_for('admin.education') }}" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="admin-card max-w-700">
+  <div class="card-body">
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        <label class="form-label">{{ form.degree.label }}</label>
+        {{ form.degree(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.institution.label }}</label>
+        {{ form.institution(class="form-control") }}
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">{{ form.year.label }}</label>
+          {{ form.year(class="form-control") }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">{{ form.status_label.label }}</label>
+          {{ form.status_label(class="form-control") }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.grade.label }}</label>
+        {{ form.grade(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">{{ form.description.label }}</label>
+        {{ form.description(class="form-control", rows=3) }}
+      </div>
+      <div class="form-actions">
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('admin.education') }}" class="btn btn-ghost">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
