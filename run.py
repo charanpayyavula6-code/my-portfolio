@@ -1,9 +1,10 @@
 import os
 import sys
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-if BASE_DIR not in sys.path:
-    sys.path.insert(0, BASE_DIR)
+# Ensure current working directory and app root are in sys.path on all platforms including Vercel
+for p in [os.getcwd(), os.path.dirname(os.path.abspath(__file__))]:
+    if p and p not in sys.path:
+        sys.path.insert(0, p)
 
 from app import create_app
 from app.extensions import db
