@@ -1,24 +1,39 @@
-# Environment secrets
+# Environment & Secrets
 .env
-.env.local
+.env.*
+!.env.example
 
-# Byte-compiled / optimized / DLL files
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python / Django
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Database
-*.db
-*.sqlite
 *.sqlite3
-instance/
-
-# Environments
+*.db
 venv/
 env/
 ENV/
+.venv/
+staticfiles/
+media/
 
-# Deployment & IDE
-.vercel/
+# System & IDE
+.DS_Store
+Thumbs.db
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="scGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </radialGradient>
+  </defs>
+  <!-- Background Shield / Hexagon -->
+  <rect width="100" height="100" rx="22" fill="url(#bgGlow)" stroke="#38bdf8" stroke-width="2.5" stroke-opacity="0.6"/>
+  <!-- Decorative Accent Line -->
+  <circle cx="50" cy="50" r="42" fill="none" stroke="url(#scGrad)" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.4"/>
+  <!-- Monogram SC -->
+  <g fill="none" stroke="url(#scGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- S -->
+    <path d="M 46 34 C 40 30, 28 32, 28 42 C 28 52, 46 48, 46 60 C 46 70, 32 72, 26 66" />
+    <!-- C -->
+    <path d="M 74 36 C 68 30, 52 30, 52 50 C 52 70, 68 70, 74 64" />
+  </g>
+  <!-- Dot Accent -->
+  <circle cx="76" cy="64" r="3" fill="#38bdf8" />
+</svg>

@@ -1,197 +1,105 @@
-# 🎓 Full-Stack Student Portfolio Management System with Admin Panel
+# Payyavula Sri Charan — AI/ML & Full-Stack Portfolio
 
-A production-grade, dynamic portfolio content management system built with **Flask, SQLAlchemy, WTForms, Flask-Login, and Jinja2**.
+[![Frontend - React 19](https://img.shields.io/badge/Frontend-React%2019%20%7C%20Vite-61DAFB?logo=react&logoColor=black)](./frontend)
+[![Backend - Django 6.1](https://img.shields.io/badge/Backend-Django%206.1%20%7C%20DRF-092E20?logo=django&logoColor=white)](./backend)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
----
-
-## 🌟 Key Features
-
-### 1. 🌐 Public Portfolio (Frontend)
-- **100% Database-Driven**: Content is pulled dynamically from SQLAlchemy models. No hardcoded HTML content.
-- **Modern Responsive Design**: Fluid layouts for mobile, tablet, laptop, and 4K desktop screens.
-- **Dark/Light Mode**: Smooth theme toggling with `localStorage` persistence.
-- **Live Contact Form**: Submissions are validated and stored in the database for the admin to review in their dashboard.
-- **Dynamic Project Details**: Fast asynchronous modal fetching via `/api/projects/<id>`.
-- **Dynamic Typing Animation**: Configurable title strings rotating in the hero header.
-
-### 2. 🛡️ Secure Admin CMS Dashboard (`/admin/dashboard`)
-- **Authentication**: Protected by **Flask-Login** and **Werkzeug password hashing** (never stores plain-text passwords).
-- **Comprehensive CRUD Operations**:
-  - 📁 **Projects**: Add, edit, delete, mark featured, choose gradients, upload custom project screenshots.
-  - ⚡ **Skills**: Add, edit, delete, choose category (Languages, AI/ML, Frameworks, DBs, Web, Tools), and proficiency levels.
-  - 💼 **Experience & Internships**: Timeline management for roles, organizations, achievements, and tech stacks.
-  - 🎓 **Education**: Track university degree, 12th, and 10th history.
-  - 📜 **Certifications**: Manage issuing platforms, verification URLs, and credential IDs.
-  - 🏆 **Achievements**: Track hackathon milestones and technical competition results.
-  - 🛠️ **Services**: Toggle active/inactive service cards offered.
-  - 📥 **Contact Messages Inbox**: View incoming messages with unread notification badges, reply links, and delete options.
-  - 👤 **Profile & Bio**: Update personal info, social URLs, counters, upload avatar photo, and upload resume PDF.
-  - 🔐 **Security**: In-dashboard admin password update tool.
+> Interactive, high-performance portfolio engineered for **Payyavula Sri Charan** — AI/ML Engineer, Python & Backend Developer, and B.E. Computer Science student (Specialization: AI & ML at Prathyusha Engineering College).
 
 ---
 
-## 🏗️ Project Architecture & Folder Structure
+## ⚡ Key Highlights & Architecture
+
+- **Modern Architecture**: Decoupled Full-Stack system featuring a **React 19 + Vite** frontend and a **Django REST Framework (DRF)** backend API.
+- **AI Copilot Experience**: Built-in interactive AI Copilot with prompt suggestions, live API integration, and natural conversation about skills, research, and projects.
+- **Neural Cyber Deck**: Interactive UI with particle effects, sound effects, dynamic theme switcher, and sound toggle.
+- **Showcase & Filter System**: Categorized flagship projects with search filters (AI & Machine Learning, Full-Stack & Systems, NLP, etc.) and deep modal views.
+- **Verified Credentials**: Live verified academic background, 10 industry certifications, and CodeAlpha ML engineering internship history.
+
+---
+
+## 📁 Repository Structure
 
 ```text
-portfolio/
-├── app/
-│   ├── __init__.py          # Flask App Factory & global error handlers
-│   ├── models.py            # SQLAlchemy database models
-│   ├── extensions.py        # db, login_manager, csrf instances
-│   │
-│   ├── auth/                # Admin Authentication Blueprint
-│   │   ├── __init__.py
-│   │   ├── routes.py        # /admin/login, /admin/logout
-│   │   └── forms.py         # LoginForm
-│   │
-│   ├── admin/               # Admin Management Blueprint
-│   │   ├── __init__.py
-│   │   ├── routes.py        # CRUD routes for all modules
-│   │   └── forms.py         # WTForms with validation & file uploads
-│   │
-│   ├── public/              # Public Portfolio Blueprint
-│   │   ├── __init__.py
-│   │   └── routes.py        # / (index), /contact, /api/projects/<id>
-│   │
-│   ├── templates/
-│   │   ├── base.html        # Public base template
-│   │   ├── errors/          # 403.html, 404.html, 500.html
-│   │   ├── auth/
-│   │   │   └── login.html   # Admin login page
-│   │   ├── public/
-│   │   │   └── index.html   # Dynamic public portfolio
-│   │   └── admin/           # Admin CMS templates (dashboard, profile, CRUD views)
-│   │
-│   └── static/
-│       ├── css/             # style.css (public), admin.css (CMS)
-│       ├── js/              # script.js (public), admin.js (CMS)
-│       └── uploads/         # User uploaded photos, projects, certs, resumes
+my-portfolio/
+├── frontend/                     # React 19 + Vite + Framer Motion
+│   ├── public/                   # Static assets & favicon
+│   ├── src/
+│   │   ├── components/           # Navbar, Hero, About, Projects, AICopilot, Contact, etc.
+│   │   ├── data/                 # Certified profile, project specs, and skills data
+│   │   ├── styles/               # Glassmorphism, cyber design tokens, responsive CSS
+│   │   └── utils/                # Audio sound synthesis and interaction helpers
+│   ├── package.json
+│   └── vite.config.js
 │
-├── config.py                # Environment configurations (SQLite / MySQL)
-├── seed.py                  # Database seeder (seeds initial data & default admin)
-├── run.py                   # Development server & CLI commands
-├── test_app.py              # Automated test suite
-├── requirements.txt         # Python dependencies
-├── .env                     # Local environment secrets
-├── .env.example             # Template environment variables
-├── .gitignore
+├── backend/                      # Django 6.1 + Django REST Framework API
+│   ├── api/                      # REST endpoints, serializers, models, and migrations
+│   │   └── management/commands/  # Seed verified portfolio data script
+│   ├── portfolio_backend/        # Core settings, CORS, and ASGI/WSGI routers
+│   ├── manage.py
+│   └── requirements.txt
+│
 └── README.md
 ```
 
 ---
 
-## 🚀 Quickstart & Local Installation
+## 🚀 Quick Start Guide
 
-### Step 1: Clone or Navigate to Project
+### 1. Prerequisites
+- **Node.js**: v18+ (tested on Node v20+)
+- **Python**: 3.10+
+
+---
+
+### 2. Run the Frontend (Vite + React)
+
 ```bash
-cd portfolio
+cd frontend
+npm install
+npm run dev
 ```
 
-### Step 2: Create & Activate Virtual Environment (Optional but Recommended)
-```bash
-# Windows
-python -m venv venv
-venv\Scripts\activate
+Frontend runs at **`http://localhost:5173/`**
 
-# Linux / macOS
-python3 -m venv venv
-source venv/bin/activate
-```
+---
 
-### Step 3: Install Dependencies
+### 3. Run the Backend API (Django + DRF)
+
 ```bash
+cd backend
 pip install -r requirements.txt
+python manage.py makemigrations api
+python manage.py migrate
+python manage.py seed_data
+python manage.py runserver 8000
 ```
 
-### Step 4: Seed Database with Initial Data
-```bash
-python seed.py
-```
-> **Default Admin Credentials:**
-> - **Username:** `admin`
-> - **Password:** `Admin@12345`
-> *(You can change these in /admin/profile or via CLI)*
-
-### Step 5: Start the Flask Development Server
-```bash
-python run.py
-```
-- 🌐 **Public Website:** `http://127.0.0.1:5000/`
-- 🛡️ **Admin Panel:** `http://127.0.0.1:5000/admin/login`
+Backend runs at **`http://localhost:8000/`**  
+Health check endpoint: **`http://localhost:8000/api/health/`**
 
 ---
 
-## 🗄️ Database Configuration
+## 📡 API Endpoints Overview
 
-### Using SQLite (Default, Zero-Config)
-By default, the application runs on SQLite with the database saved to `portfolio.db`. No installation needed!
-
-### Using MySQL
-1. Create a database in MySQL:
-   ```sql
-   CREATE DATABASE portfolio_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   ```
-2. In `.env`, update `DATABASE_URL`:
-   ```env
-   DATABASE_URL=mysql+pymysql://username:password@localhost:3306/portfolio_db
-   ```
-3. Run `python seed.py` to create tables and seed initial records into MySQL.
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/` | API Root and documentation index |
+| `GET` | `/api/health/` | System & database health status |
+| `GET` | `/api/profile/` | Sri Charan's verified profile details |
+| `GET` | `/api/projects/` | List flagship projects (`?featured=true`, `?category=AI`) |
+| `GET` | `/api/skills/` | List technical competencies & proficiency levels |
+| `GET` | `/api/certifications/`| List verified academic & industry credentials |
+| `POST`| `/api/contact/` | Submit visitor inquiry with automatic validation |
+| `POST`| `/api/ai/chat/` | Query Charan AI Copilot about experience & projects |
 
 ---
 
-## 🛠️ Useful CLI Commands
+## 👤 Author
 
-```bash
-# Run tests
-python test_app.py
-
-# Create or reset an admin user interactively
-flask create-admin
-
-# Re-seed database
-python seed.py
-```
-
----
-
-## 🌐 Deployment Options
-
-### Option 1: Render / Railway (Recommended)
-1. Push this repository to GitHub.
-2. In Render or Railway, create a **New Web Service**.
-3. Set **Build Command**: `pip install -r requirements.txt && python seed.py`
-4. Set **Start Command**: `gunicorn run:app` (add `gunicorn` to requirements)
-5. Add Environment Variables:
-   - `SECRET_KEY`: (Generate a secure random string)
-   - `DATABASE_URL`: (Connection string from PostgreSQL/MySQL addon or persistent disk for SQLite)
-
-### Option 2: Docker
-Create a simple `Dockerfile`:
-```dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt gunicorn
-COPY . .
-RUN python seed.py
-EXPOSE 5000
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "run:app"]
-```
-
----
-
-## 🔌 Future REST API Integration
-
-The architecture is blueprint-isolated and API-ready:
-- Existing endpoint: `GET /api/projects/<id>`
-- To add external endpoints for a mobile app or frontend:
-  Create an `app/api/` blueprint and serialize models to JSON with `jsonify`.
-
----
-
-## 🔒 Security Best Practices Implemented
-- **Passwords**: Werkzeug salt & SHA256 PBKDF2 hashing.
-- **CSRF Protection**: All forms guarded with Flask-WTF tokens.
-- **File Uploads**: Validated extensions and randomized UUID filenames.
-- **Environment Variables**: Sensitive credentials isolated to `.env`.
-- **SQL Injection Prevention**: SQLAlchemy parameterized ORM queries.
+**Payyavula Sri Charan**  
+- **GitHub**: [@charanpayyavula6-code](https://github.com/charanpayyavula6-code)  
+- **LinkedIn**: [sricharan-payyavula](https://www.linkedin.com/in/sricharan-payyavula/)  
+- **Email**: charanpayyavula6@gmail.com  
+- **Institution**: Prathyusha Engineering College, Chennai (B.E. CSE - AIML)

@@ -1,0 +1,56 @@
+/* Responsive Breakpoints & Device Specific Rules */
+
+/* Mobile Phones (up to 640px) */
+@media (max-width: 640px) {
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .section-padding {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: var(--space-sm);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .modal-content {
+    padding: var(--space-md);
+    max-height: 92vh;
+  }
+}
+
+/* Tablets (641px to 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .section-padding {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+  }
+
+  .hero-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* Touch Friendly Targets */
+@media (pointer: coarse) {
+  button,
+  .btn,
+  a {
+    min-height: 44px;
+  }
+}

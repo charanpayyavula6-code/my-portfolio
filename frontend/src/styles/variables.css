@@ -1,0 +1,135 @@
+/* Design Tokens & Theme Variables for Payyavula Sri Charan's Next-Gen Portfolio */
+
+:root {
+  /* Fonts */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* High-Voltage Cyber Palette */
+  --accent-cyan: #00f0ff;
+  --accent-cyan-bright: #38e1ff;
+  --accent-blue: #3b82f6;
+  --accent-violet: #8b5cf6;
+  --accent-purple: #a855f7;
+  --accent-magenta: #ec4899;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #00f0ff 0%, #6366f1 50%, #a855f7 100%);
+  --grad-accent: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  --grad-violet: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --grad-emerald: linear-gradient(135deg, #10b981 0%, #00f0ff 100%);
+  --grad-glow: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.2) 0%, transparent 70%);
+
+  /* Transitions */
+  --transition-fast: 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+
+  /* Border Radii */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+
+  /* Layout */
+  --max-width: 1240px;
+  --nav-height: 76px;
+}
+
+/* Dark Theme (Default - Deep Cyber-OLED) */
+[data-theme="dark"] {
+  --bg-primary: #030712;
+  --bg-secondary: #060b18;
+  --bg-card: rgba(10, 16, 31, 0.72);
+  --bg-card-hover: rgba(15, 23, 44, 0.88);
+  --bg-glass: rgba(6, 11, 24, 0.82);
+  --bg-input: rgba(10, 16, 31, 0.85);
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-hover: rgba(0, 240, 255, 0.45);
+  --border-glow: 0 0 30px rgba(0, 240, 255, 0.22);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #030712;
+
+  --badge-bg: rgba(0, 240, 255, 0.09);
+  --badge-text: #00f0ff;
+  --badge-border: rgba(0, 240, 255, 0.3);
+
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 32px -10px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 24px 48px -15px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 50px -10px rgba(0, 240, 255, 0.35);
+
+  --nav-bg: rgba(6, 11, 24, 0.8);
+  --nav-pill-bg: rgba(255, 255, 255, 0.035);
+  --nav-pill-border: rgba(255, 255, 255, 0.08);
+  --nav-pill-hover: rgba(0, 240, 255, 0.1);
+  --nav-pill-active-bg: rgba(0, 240, 255, 0.14);
+  --nav-pill-active-border: rgba(0, 240, 255, 0.4);
+  --nav-pill-active-text: #00f0ff;
+  --nav-btn-ghost-bg: rgba(255, 255, 255, 0.04);
+  --nav-btn-ghost-border: rgba(255, 255, 255, 0.1);
+
+  --terminal-bg: rgba(4, 8, 19, 0.96);
+  --terminal-header: rgba(10, 16, 31, 0.95);
+}
+
+/* Light Theme (Clean Cyber-Luminous) */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: #ffffff;
+  --bg-glass: rgba(248, 250, 252, 0.85);
+  --bg-input: #ffffff;
+
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-color-hover: rgba(2, 132, 199, 0.45);
+  --border-glow: 0 0 25px rgba(2, 132, 199, 0.18);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-inverse: #f8fafc;
+
+  --badge-bg: rgba(2, 132, 199, 0.09);
+  --badge-text: #0284c7;
+  --badge-border: rgba(2, 132, 199, 0.25);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 35px -5px rgba(2, 132, 199, 0.2);
+
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --nav-pill-bg: rgba(0, 0, 0, 0.035);
+  --nav-pill-border: rgba(0, 0, 0, 0.08);
+  --nav-pill-hover: rgba(0, 0, 0, 0.06);
+  --nav-pill-active-bg: rgba(2, 132, 199, 0.12);
+  --nav-pill-active-border: rgba(2, 132, 199, 0.3);
+  --nav-pill-active-text: #0284c7;
+  --nav-btn-ghost-bg: rgba(0, 0, 0, 0.04);
+  --nav-btn-ghost-border: rgba(0, 0, 0, 0.08);
+
+  --terminal-bg: #0f172a;
+  --terminal-header: #1e293b;
+}
